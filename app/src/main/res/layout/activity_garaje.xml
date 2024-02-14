@@ -9,16 +9,20 @@
     tools:context=".Rmotos.GarajeActivity">
 
     <androidx.cardview.widget.CardView
+
         android:id="@+id/cardView"
         android:layout_width="457dp"
         android:layout_height="231dp"
+        android:layout_marginTop="4dp"
         android:backgroundTint="@color/black"
         app:cardCornerRadius="40dp"
         app:cardElevation="8dp"
         app:circularflow_radiusInDP="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
 
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-111dp">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
     </androidx.cardview.widget.CardView>
 
@@ -32,6 +36,7 @@
         app:layout_constraintStart_toStartOf="parent"/>
 
     <EditText
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
