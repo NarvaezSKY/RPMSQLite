@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.RPMSQLite" parent="Base.Theme.RPMSQLite" />
+    <style name="Theme.RPM_SQLite" parent="Theme.RPMSQLite">
+        <item name="windowSplashScreenBackground"> @color/black </item>
+        <item name="windowSplashScreenAnimatedIcon"> @drawable/logo_negativo </item>
+        <item name="windowSplashScreenAnimationDuration"> 300 </item>
+        <item name="postSplashScreenTheme"> @style/Base.Theme.RPMSQLite </item>
+    </style>
 </resources>
