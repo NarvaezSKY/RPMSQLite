@@ -3,5 +3,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="WP_Gray">#EDF1F1</color>
+    <color name="WP_trasparent">#00EDF1F1</color>
     <color name="ColorPrincipalAPP">#FFC300</color>
 </resources>
