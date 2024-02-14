@@ -20,6 +20,7 @@ class HomeFragment : Fragment() {
     ): View {
         _binding= FragmentHomeBinding.inflate(layoutInflater, container, false)
         return binding.root
+
     }
 
 

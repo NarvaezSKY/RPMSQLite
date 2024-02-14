@@ -27,10 +27,9 @@ data class ManagerDb(val context: Context) {
 
     }
 
-    fun inserDataRmotos(id:Int, marca:String, modelo:Int, cilindraje:Int, placa:String):Long{
+    fun inserDataRmotos( marca:String, modelo:Int, cilindraje:Int, placa:String):Long{
         openBdWr()
         val content = ContentValues()
-        content.put("id",id)
         content.put("marca",marca)
         content.put("modelo",modelo)
         content.put("cilindraje",cilindraje)
