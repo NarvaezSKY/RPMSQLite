@@ -1,5 +1,6 @@
 package com.rpm.rpmsqlite.Routes
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
@@ -22,6 +23,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.btnRegistrarRuta.setOnClickListener {
+            val inetent= Intent(this, saveRutasActivity::class.java)
+            startActivity(inetent)
+        }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
