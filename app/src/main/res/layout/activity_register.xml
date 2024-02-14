@@ -8,95 +8,107 @@
     tools:context=".Register">
 
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="132dp"
+        android:text="Registro"
+        android:textColor="@color/white"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/black"
+
+        android:src="@drawable/baseline_arrow_back_ios_new_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="5dp"
-        android:paddingLeft="5dp"
-        android:orientation="horizontal"
-        android:layout_marginTop="0dp"
-        android:background="#FF0000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/baseline_arrow_back_ios_new_24"
-            android:backgroundTint="@color/black"/>
+        android:background="@drawable/curve_register"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="30dp"
+        android:paddingTop="50dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginRight="50dp"
-            android:gravity="center"
-            android:text="Registro"
-            android:textStyle="bold"
-            android:textFontWeight=""
-            android:textSize="30sp"
-            android:textColor="@color/white"/>
-    </LinearLayout>
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="124dp"
-        android:backgroundTint="#EDF1F1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_margin="10dp"
+            android:text="Nombre"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/ETName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre"
+            android:layout_margin="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Apellido"
             android:textColor="@color/black"
-            android:textColorHint="#504F4F"
-            android:textSize="22sp"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/ETLastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Apellido"
+            android:layout_margin="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Correo electronico"
             android:textColor="@color/black"
-            android:textColorHint="#504F4F"
-            android:textSize="22sp"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/ETEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Correo"
+            android:layout_margin="10dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Contraseña"
             android:textColor="@color/black"
-            android:textColorHint="#504F4F"
-            android:textSize="22sp"/>
+            android:textSize="20sp" />
 
         <EditText
             android:id="@+id/ETPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Contraseña"
+            android:layout_margin="10dp" />
+
+        <Button
+            android:id="@+id/BtnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrarme"
             android:textColor="@color/black"
-            android:textColorHint="#504F4F"
-            android:textSize="22sp"/>
-
-            <Button
-                android:id="@+id/BtnRegister"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Registrarme"/>
-
-        </LinearLayout>
-
-
-    </androidx.cardview.widget.CardView>
+            android:backgroundTint="#FFC300"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
