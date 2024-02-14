@@ -6,4 +6,5 @@
     <string name="Home">Home</string>
     <string name="Notification">Notification</string>
     <string name="Menu">Menu</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
