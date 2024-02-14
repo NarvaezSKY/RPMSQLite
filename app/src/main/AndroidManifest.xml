@@ -38,7 +38,7 @@
             android:name=".Rmotos.ShowGarageActivity"
             android:exported="false" />
         <activity
-            android:name=".Rmotos.GarajeActivity"
+            android:name=".MainActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Rmotos.GarajeActivity"
             android:exported="false">
 
         </activity>
