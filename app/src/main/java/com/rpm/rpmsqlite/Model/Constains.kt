@@ -4,8 +4,8 @@ class Constains {
 
     companion object{
         const val nomDb="rpmdb"
-        const val versionDb=1
-        const val USERS= "CREATE TABLE users(id int, name text , lastname text)"
+        const val versionDb=2
+        const val User= "CREATE TABLE User(id integer primary key autoincrement, nombre text , apellido text, email text unique, password text )"
 
     }
 }

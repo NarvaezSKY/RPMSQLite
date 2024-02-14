@@ -1,5 +1,6 @@
 package com.rpm.rpmsqlite.Model
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 
@@ -25,8 +26,18 @@ data class ManagerDb(val context: Context) {
 
     }
 
-    fun insertUserData(){
+    fun insertUserData(id: Int, nombre: String, apellido: String, email: String, contrasena: String): Long {
         openBdWr()
+
+        val userContenedor= ContentValues()
+
+        userContenedor.put("id", id)
+        userContenedor.put("nombre", nombre)
+        userContenedor.put("apellido", apellido)
+        userContenedor.put("email", email)
+        userContenedor.put("contraseña", contrasena)
+
+        return bd.insert("User", null, userContenedor)
     }
 
 }
