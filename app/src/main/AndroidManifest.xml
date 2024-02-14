@@ -13,6 +13,12 @@
         android:theme="@style/Theme.RPMSQLite"
         tools:targetApi="31">
         <activity
+            android:name=".Rmotos.ShowGarageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Rmotos.GarageActivity"
+            android:exported="false" />
+        <activity
             android:name=".Rmotos.GarajeActivity"
             android:exported="false" />
         <activity
