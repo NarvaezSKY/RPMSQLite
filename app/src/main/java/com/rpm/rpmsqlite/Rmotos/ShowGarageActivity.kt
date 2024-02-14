@@ -22,9 +22,9 @@ class ShowGarageActivity : AppCompatActivity() {
         val arrayGarage = manager.getDataRmotos()
 
         val listGarage = binding.listView
-        val arratAdapter = ArrayAdapter<Garage>(this,android.R.layout.simple_list_item_1,arrayGarage)
+        val arrayAdapter = ArrayAdapter<Garage>(this,android.R.layout.simple_list_item_1,arrayGarage)
 
-        listGarage.adapter = arratAdapter
+        listGarage.adapter = arrayAdapter
 
         Toast.makeText(this,"Nueva Moto Registrada",Toast.LENGTH_SHORT).show()
     }
