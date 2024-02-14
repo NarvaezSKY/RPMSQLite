@@ -12,13 +12,14 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="132dp"
-        android:text="Registro"
+        android:layout_marginTop="20dp"
+        android:text="@string/txt_registro"
         android:textColor="@color/white"
-        android:textSize="25dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        android:textSize="28dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
         android:layout_width="wrap_content"
@@ -51,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Nombre"
+            android:text="@string/txt_nombre"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -59,13 +60,14 @@
             android:id="@+id/ETName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp" />
+            android:layout_margin="10dp"
+            android:inputType="text"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Apellido"
+            android:text="@string/txt_apellido"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -73,13 +75,14 @@
             android:id="@+id/ETLastName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp" />
+            android:layout_margin="10dp"
+            android:inputType="text"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Correo electronico"
+            android:text="@string/txt_correo_electronico"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -87,13 +90,14 @@
             android:id="@+id/ETEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp" />
+            android:layout_margin="10dp"
+            android:inputType="textEmailAddress"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Contraseña"
+            android:text="@string/txt_contrase_a"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -101,14 +105,16 @@
             android:id="@+id/ETPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp" />
+            android:layout_margin="10dp"
+            android:inputType="textPassword"/>
 
         <Button
             android:id="@+id/BtnRegister"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Registrarme"
-            android:textColor="@color/black"
-            android:backgroundTint="#FFC300"/>
+            android:layout_height="55dp"
+            android:backgroundTint="@color/ColorPrincipalAPP"
+            android:text="@string/txt_registrarme"
+            android:textSize="20dp"
+            android:textColor="@color/black" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

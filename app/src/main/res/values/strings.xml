@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">RPMSQLite</string>
+    <string name="txt_registrarme">Registrarme</string>
+    <string name="txt_contrase_a">Contraseña</string>
+    <string name="txt_correo_electronico">Correo electronico</string>
+    <string name="txt_apellido">Apellido</string>
+    <string name="txt_nombre">Nombre</string>
+    <string name="txt_registro">Registro</string>
 </resources>
