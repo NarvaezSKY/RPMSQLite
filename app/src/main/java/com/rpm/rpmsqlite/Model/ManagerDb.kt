@@ -25,4 +25,8 @@ data class ManagerDb(val context: Context) {
 
     }
 
+    fun insertUserData(){
+        openBdWr()
+    }
+
 }
