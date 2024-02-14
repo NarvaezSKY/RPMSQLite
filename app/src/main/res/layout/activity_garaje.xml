@@ -5,51 +5,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".Rmotos.GarajeActivity">
 
-    <!-- EditText 1 -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="457dp"
+        android:layout_height="231dp"
+        android:backgroundTint="@color/black"
+        app:cardCornerRadius="40dp"
+        app:cardElevation="8dp"
+        app:circularflow_radiusInDP="20dp"
+
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-111dp">
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_nav"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:gravity="center"
+        android:text="Garage"
+        android:textSize="30dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="166dp" />
+
     <EditText
         android:id="@+id/editText1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="268dp"
+        android:gravity="center"
         android:hint="Marca"
-        android:inputType="text"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- EditText 2 -->
     <EditText
         android:id="@+id/editText2"
+        android:gravity="center"
         android:layout_width="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
         android:layout_height="wrap_content"
         android:hint="Modelo"
-        android:inputType="number"
+        android:backgroundTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText1"/>
+        app:layout_constraintTop_toBottomOf="@+id/editText1"
+        android:layout_marginTop="8dp"/>
 
     <!-- EditText 3 -->
     <EditText
         android:id="@+id/editText3"
         android:layout_width="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:gravity="center"
         android:layout_height="wrap_content"
-        android:hint="Cilindraje"
-        android:inputType="number"
+        android:hint="cilindraje"
+        android:backgroundTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"/>
+        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        android:layout_marginTop="8dp"/>
 
     <!-- EditText 4 -->
     <EditText
         android:id="@+id/editText4"
         android:layout_width="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:hint="Placa"
-        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText3"/>
+        app:layout_constraintTop_toBottomOf="@+id/editText3"
+        android:layout_marginTop="8dp"/>
 
     <!-- Botón 1 -->
     <Button
@@ -57,18 +107,30 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Registrar"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:gravity="center"
+        android:backgroundTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText4"/>
+        app:layout_constraintTop_toBottomOf="@+id/editText4"
+        android:layout_marginTop="16dp"/>
 
     <!-- Botón 2 -->
     <Button
         android:id="@+id/button2"
         android:layout_width="0dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:backgroundTint="@color/black"
         android:layout_height="wrap_content"
         android:text="Garage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button1"/>
+        app:layout_constraintTop_toBottomOf="@+id/button1"
+        android:layout_marginTop="8dp"/>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
