@@ -26,12 +26,12 @@ data class ManagerDb(val context: Context) {
 
     }
 
-    fun insertUserData(id: Int, nombre: String, apellido: String, email: String, password: String): Long {
+    fun insertUserData( nombre: String, apellido: String, email: String, password: String): Long {
         openBdWr()
 
         val userContenedor= ContentValues()
 
-        userContenedor.put("id", id)
+
         userContenedor.put("nombre", nombre)
         userContenedor.put("apellido", apellido)
         userContenedor.put("email", email)
