@@ -21,7 +21,7 @@
             map:layout_constraintStart_toStartOf="parent"
             android:layout_marginBottom="20dp"
             android:backgroundTint="@color/primary"
-            android:text="Registrar Rutas"
+            android:text="Registra tus Rutas"
             map:layout_constraintBottom_toBottomOf="parent"/>
 
 
