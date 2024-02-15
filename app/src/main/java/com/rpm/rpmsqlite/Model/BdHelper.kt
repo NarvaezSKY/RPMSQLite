@@ -9,6 +9,7 @@ class BdHelper(context:Context):SQLiteOpenHelper(
 ) {
     override fun onCreate(db: SQLiteDatabase?) {
         db?.execSQL(Constains.USERS)
+        db?.execSQL(Constains.ROUTES)
 
     }
 

@@ -3,6 +3,7 @@ package com.rpm.rpmsqlite.Routes
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.LayoutInflater
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -16,13 +17,15 @@ import com.rpm.rpmsqlite.databinding.ActivityMapsBinding
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
+
     private lateinit var binding: ActivityMapsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMapsBinding.inflate(layoutInflater)
+        binding = ActivityMapsBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
+
 
         binding.btnRegistrarRuta.setOnClickListener {
             val inetent= Intent(this, saveRutasActivity::class.java)
@@ -46,10 +49,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        val zoom =5.0f
+        val zoom =9.0f
         // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(sydney,zoom))
+        val popayan = LatLng(2.44184386299662, -76.60638743215519)
+        mMap.addMarker(MarkerOptions().position(popayan).title("Parque caldas"))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(popayan,zoom))
     }
 }

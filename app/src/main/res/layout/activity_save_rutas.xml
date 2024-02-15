@@ -76,7 +76,7 @@
                     android:background="@drawable/background_btn"
                     android:hint="Cordenadas Ruta" />
 
-                <EditText
+                <MultiAutoCompleteTextView
                     android:id="@+id/detallesRuta"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
@@ -94,15 +94,17 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/btnGuardarRoute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/primary"
         android:text="Guardar"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:backgroundTint="@color/primary"
 
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sectionTwo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

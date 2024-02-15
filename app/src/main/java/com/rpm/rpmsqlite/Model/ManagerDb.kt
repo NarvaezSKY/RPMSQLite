@@ -1,5 +1,6 @@
 package com.rpm.rpmsqlite.Model
 
+import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 
@@ -19,9 +20,20 @@ data class ManagerDb(val context: Context) {
     }
 
 
-    fun inserData() {
-        openBdWr()
+    fun insertRoute (nombreRuta:String, cordenadas:Double, detalleRuta:String):Long {
 
+        openBdWr() // Abrir bd modo escritura
+
+        //Creo contenedor de valores para insertar data
+        val contenedor = ContentValues()
+        contenedor.put("rutaN",nombreRuta)
+        contenedor.put("cordenada",cordenadas)
+        contenedor.put("detalle",detalleRuta)
+
+        //Llamo el método insert
+        val result = bd.insert("routes", null, contenedor )
+
+        return result
 
     }
 
