@@ -107,7 +107,7 @@
                 android:textColor="@color/black" />
 
             <TextView
-                android:id="@+id/passwordss"
+                android:id="@+id/registrarse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
