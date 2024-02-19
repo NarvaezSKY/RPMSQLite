@@ -28,7 +28,7 @@ class saveRutasActivity : AppCompatActivity() {
         //Instanciamos la clase bd Helper
         val manager = ManagerDb(this)
 
-        manager.insertRoute(nombreRuta, cordenadas.toDouble(), detalleRuta)
+        manager.insertRoute(nombreRuta, cordenadas.toInt(), detalleRuta)
 
 
         Toast.makeText(

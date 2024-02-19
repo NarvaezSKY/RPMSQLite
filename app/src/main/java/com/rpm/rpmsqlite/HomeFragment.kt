@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.rpm.rpmsqlite.Routes.ListarRutasActivity
 import com.rpm.rpmsqlite.Routes.MapsActivity
 import com.rpm.rpmsqlite.databinding.FragmentHomeBinding
 
@@ -29,6 +30,11 @@ class HomeFragment : Fragment() {
         val btnTrazarRuta = binding.btnTrazarRuta
         btnTrazarRuta.setOnClickListener {
             val intent = Intent(requireContext(), MapsActivity::class.java)
+            startActivity(intent)
+        }
+        val btnListarRuta = binding.btnTusRutas
+        btnListarRuta.setOnClickListener {
+            val intent = Intent(requireContext(), ListarRutasActivity::class.java)
             startActivity(intent)
         }
     }
