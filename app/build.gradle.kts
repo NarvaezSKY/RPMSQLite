@@ -43,6 +43,7 @@ android {
 }
 
 dependencies {
+
     //map
     implementation("com.google.android.gms:play-services-maps:18.1.0")
     //Dependences of navigation
@@ -58,6 +59,10 @@ dependencies {
 
 
 
+
+
+    //ApiSplash Screen
+    implementation("androidx.core:core-splashscreen:1.0.0")
 
 
     implementation("androidx.core:core-ktx:1.12.0")

@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:topLeftRadius="100dp" /> <!-- Radio de la esquina superior izquierda -->
+    <solid android:color="@color/WP_Gray" /> <!-- Color de fondo de la CardView -->
+</shape>

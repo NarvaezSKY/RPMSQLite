@@ -5,4 +5,8 @@
     <color name="primary">#FFC800</color>
     <color name="red">#FF0000</color>
 
+
+    <color name="WP_Gray">#EDF1F1</color>
+    <color name="WP_trasparent">#00EDF1F1</color>
+    <color name="ColorPrincipalAPP">#FFC300</color>
 </resources>

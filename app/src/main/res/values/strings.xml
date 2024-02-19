@@ -7,4 +7,13 @@
     <string name="Notification">Notification</string>
     <string name="Menu">Menu</string>
     <string name="title_activity_maps">MapsActivity</string>
+
+    <string name="txt_registrarme">Registrarme</string>
+    <string name="txt_contrase_a">Contraseña</string>
+    <string name="txt_correo_electronico">Correo electronico</string>
+    <string name="txt_apellido">Apellido</string>
+    <string name="txt_nombre">Nombre</string>
+    <string name="txt_registro">Registro</string>
+    <string name="txt_registrate">Registrate</string>
+    <string name="txt_si_no_tienes_cuenta">¿Si no tienes cuenta?,</string>
 </resources>
