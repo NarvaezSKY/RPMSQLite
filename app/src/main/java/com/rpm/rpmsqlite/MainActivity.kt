@@ -25,6 +25,8 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
+
     private fun initUi() {
         initNavigation()
     }

@@ -72,7 +72,7 @@
                         android:orientation="vertical">
 
                         <com.google.android.material.bottomnavigation.BottomNavigationView
-                            android:id="@+id/btnDbCiudad"
+                            android:id="@+id/btnTrazarRuta"
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
                             android:layout_margin="15dp"
@@ -116,7 +116,7 @@
 
 
                         <com.google.android.material.bottomnavigation.BottomNavigationView
-                            android:id="@+id/btnDbDatos"
+                            android:id="@+id/btnTusRutas"
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
                             android:layout_margin="20dp"
@@ -159,7 +159,7 @@
 
 
                         <com.google.android.material.bottomnavigation.BottomNavigationView
-                            android:id="@+id/btnMapa"
+                            android:id="@+id/btnGaraje"
                             android:layout_width="match_parent"
                             android:layout_height="100dp"
                             android:layout_margin="20dp"
