@@ -11,6 +11,7 @@ class BdHelper(context:Context):SQLiteOpenHelper(
         //db?.execSQL(Constains.USERS)
         db?.execSQL(Constains.ROUTES)
         db?.execSQL(Constains.User)
+        db?.execSQL(Constains.REGISTERMOTOS)
 
     }
 
@@ -18,6 +19,8 @@ class BdHelper(context:Context):SQLiteOpenHelper(
         //db?.execSQL("DROP TABLE IF EXISTS users")
         db?.execSQL("DROP TABLE IF EXISTS routes")
         db?.execSQL("DROP TABLE IF EXISTS User")
+        db?.execSQL("DROP TABLE IF EXISTS rmotos")
+
 
 
 

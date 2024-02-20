@@ -40,11 +40,17 @@
 
 
 <activity
-            android:name=".SplashActivity"
+            android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Base.Theme.RPMSQLite">
+            android:theme="@style/Base.Theme.RPMSQLite"/>
 
 
+        <activity
+            android:name=".Rmotos.ShowGarageActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SplashActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -59,9 +65,12 @@
             android:exported="true">
 
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
+
+    <activity
+            android:name=".Rmotos.GarajeActivity"
+            android:exported="false">
+
+        </activity>
     </application>
 
 </manifest>

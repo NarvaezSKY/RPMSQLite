@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.rpm.rpmsqlite.Routes.ListarRutasActivity
+import com.rpm.rpmsqlite.Rmotos.GarajeActivity
 import com.rpm.rpmsqlite.Routes.MapsActivity
 import com.rpm.rpmsqlite.databinding.FragmentHomeBinding
 
@@ -22,6 +23,7 @@ class HomeFragment : Fragment() {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,6 +37,10 @@ class HomeFragment : Fragment() {
         val btnListarRuta = binding.btnTusRutas
         btnListarRuta.setOnClickListener {
             val intent = Intent(requireContext(), ListarRutasActivity::class.java)
+            startActivity(intent)
+        }
+        binding.btnGaraje.setOnClickListener {
+            val intent = Intent(requireContext(), GarajeActivity::class.java)
             startActivity(intent)
         }
     }
