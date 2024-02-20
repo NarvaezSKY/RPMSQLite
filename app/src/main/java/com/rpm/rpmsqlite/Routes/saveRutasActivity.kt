@@ -14,6 +14,14 @@ class saveRutasActivity : AppCompatActivity() {
         binding = ActivitySaveRutasBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val cordenadasInicio = intent.extras?.getString("cordenadasInicio").orEmpty()
+        val cordenadasFinal = intent.extras?.getString("cordenadasFinal").orEmpty()
+
+
+
+        binding.cordenadasRutaInicio.text=cordenadasInicio
+        binding.cordenadasRutaFinal.text=cordenadasFinal
+
         binding.btnGuardarRoute.setOnClickListener {
             guardarRuta()
         }
@@ -26,7 +34,9 @@ class saveRutasActivity : AppCompatActivity() {
         val cordenadasInicio = intent.extras?.getString("cordenadasInicio").orEmpty()
         val cordenadasFinal = intent.extras?.getString("cordenadasFinal").orEmpty()
 
-        // Aquí puedes realizar las operaciones necesarias con los datos obtenidos
+
+
+
 
         val manager = ManagerDb(this)
         manager.insertRoute(nombreRuta, cordenadasInicio, cordenadasFinal, detalleRuta)

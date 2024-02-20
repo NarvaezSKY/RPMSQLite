@@ -141,7 +141,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         routeResponse?.features?.firstOrNull()?.geometry?.coordinates?.let { coordinates ->
             val polyLineOptions = PolylineOptions().apply {
-                width(11f)
+                width(9f)
                 color(Color.parseColor("#ffc800"))
                 coordinates.forEach { coordinate ->
                     add(LatLng(coordinate[1], coordinate[0]))
