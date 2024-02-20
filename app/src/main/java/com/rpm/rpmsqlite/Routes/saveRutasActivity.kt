@@ -11,31 +11,26 @@ class saveRutasActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivitySaveRutasBinding.inflate(layoutInflater)
-
         setContentView(binding.root)
 
-        binding.btnGuardarRoute.setOnClickListener { guardarRuta() }
+        binding.btnGuardarRoute.setOnClickListener {
+            guardarRuta()
+        }
     }
 
     fun guardarRuta() {
+        val nombreRuta = binding.nombreRuta.text.toString()
+        val detalleRuta = binding.detallesRuta.text.toString()
 
-        var nombreRuta = binding.nombreRuta.text.toString()
-        var cordenadas = binding.cordenadasRuta.text.toString()
-        var detalleRuta = binding.detallesRuta.text.toString()
+        val cordenadasInicio = intent.extras?.getString("cordenadasInicio").orEmpty()
+        val cordenadasFinal = intent.extras?.getString("cordenadasFinal").orEmpty()
 
-        //Instanciamos la clase bd Helper
+        // Aquí puedes realizar las operaciones necesarias con los datos obtenidos
+
         val manager = ManagerDb(this)
+        manager.insertRoute(nombreRuta, cordenadasInicio, cordenadasFinal, detalleRuta)
 
-        manager.insertRoute(nombreRuta, cordenadas.toInt(), detalleRuta)
-
-
-        Toast.makeText(
-            this,
-            "La ruta se guardó correctamente", Toast.LENGTH_SHORT).show()
-
+        Toast.makeText(this, "Ruta guardada: $nombreRuta", Toast.LENGTH_SHORT).show()
     }
 }
-
-

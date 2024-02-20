@@ -22,14 +22,15 @@ data class ManagerDb(val context: Context) {
     }
 
 
-    fun insertRoute (nombreRuta:String, cordenadas:Int, detalleRuta:String):Long {
+    fun insertRoute (nombreRuta:String, cordenadasInicio:String,cordenadasFinal:String, detalleRuta:String):Long {
 
         openBdWr() // Abrir bd modo escritura
 
         //Creo contenedor de valores para insertar data
         val contenedor = ContentValues()
         contenedor.put("rutaN",nombreRuta)
-        contenedor.put("cordenada",cordenadas)
+        contenedor.put("cordenadasInicio",cordenadasInicio)
+        contenedor.put("cordenadasFinal",cordenadasFinal)
         contenedor.put("detalle",detalleRuta)
 
         //Llamo el método insert
@@ -82,17 +83,21 @@ data class ManagerDb(val context: Context) {
             do {
                 //Almacenar en variable lo que contiene el cursor en la columna cod y nombre
                 val nombreR = cursor.getColumnIndex("rutaN") // se almacena en las variables lo que tiene en el cursor en la fila cero
-                val codCordenada = cursor.getColumnIndex("cordenada")
+                val cordenadasInicio = cursor.getColumnIndex("cordenadasInicio")
+                val cordenadasFinal = cursor.getColumnIndex("cordenadasFinal")
+
                 val detalle = cursor.getColumnIndex("detalle")
 
                 //Obtener valores condicionando a valores no null
-                val vlrNombreR:String = cursor.getString(nombreR) ?: " "
-                val vlrcodCordenada: Int = cursor.getInt(codCordenada)
-                val vlrDetalle: String = cursor.getString(detalle) ?:" "
+                val vlrNombreR:String = cursor.getString(nombreR)
+                val vlrcodCordenadaInicio: String = cursor.getString(cordenadasInicio)
+                val vlrcodCordenadaFinal: String = cursor.getString(cordenadasFinal)
+
+                val vlrDetalle: String = cursor.getString(detalle)
 
                 //Crear instancia de ciudad y agregar a la lista
 
-                val route = Route(vlrNombreR, vlrcodCordenada, vlrDetalle) // paso los valores obtenidos del cursor a mi objeto ciudad
+                val route = Route(vlrNombreR, vlrcodCordenadaInicio,vlrcodCordenadaFinal, vlrDetalle) // paso los valores obtenidos del cursor a mi objeto ciudad
 
                 routeList.add(route) // Agrego mi objeto ciudad al array list
 
