@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.rpm.rpmsqlite.Rmotos.GarajeActivity
 import com.rpm.rpmsqlite.Routes.ListarRutasActivity
@@ -41,6 +42,9 @@ class HomeFragment : Fragment() {
         binding.btnGaraje.setOnClickListener {
             val intent = Intent(requireContext(), GarajeActivity::class.java)
             startActivity(intent)
+        }
+        binding.btnExplorar.setOnClickListener {
+            Toast.makeText(requireContext(), "Proximamente!!", Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -10,6 +10,7 @@ import com.rpm.rpmsqlite.databinding.ActivityListarRutasBinding
 
 class ListarRutasActivity : AppCompatActivity() {
     private lateinit var binding: ActivityListarRutasBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -19,12 +20,15 @@ class ListarRutasActivity : AppCompatActivity() {
         val manager = ManagerDb(this)
         val arrayRoute = manager.getData()
 
+        // Crear una lista de nombres de rutas
+        val nombreDeRutas = arrayRoute.map { it.rutaN }
+
         val listRoute = binding.listaRutas
-        val arrayAdapter = ArrayAdapter<Route>(this,android.R.layout.simple_list_item_1,arrayRoute)
+        val arrayAdapter = ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, nombreDeRutas)
 
         listRoute.adapter = arrayAdapter
         Toast.makeText(this, "Rutas listadas", Toast.LENGTH_SHORT).show()
-
-
     }
+
+
 }
