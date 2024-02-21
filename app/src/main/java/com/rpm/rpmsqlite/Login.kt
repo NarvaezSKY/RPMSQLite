@@ -2,6 +2,7 @@ package com.rpm.rpmsqlite
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.rpm.rpmsqlite.Model.ManagerDb
 import com.rpm.rpmsqlite.databinding.ActivityLoginBinding
@@ -28,11 +29,13 @@ class Login : AppCompatActivity() {
             val password = binding.edtPassword.text.toString()
 
             if (isValidUser(email, password)) {
+                Log.d("LoginActivity", "Inicio de sesión exitoso")
                 Toast.makeText(applicationContext, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
+                Log.d("LoginActivity", "Credenciales incorrectas")
                 Toast.makeText(applicationContext, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
             }
         }

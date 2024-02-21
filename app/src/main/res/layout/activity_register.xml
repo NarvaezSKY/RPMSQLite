@@ -52,62 +52,109 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:text="@string/txt_nombre"
             android:textColor="@color/black"
+            android:textStyle="bold"
             android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/ETName"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:inputType="text"/>
+            android:layout_marginVertical="10dp"
+            android:background="@color/white"
+            app:boxBackgroundMode="none"
+            app:endIconMode="clear_text"
+            app:hintEnabled="false">
 
+            <EditText
+                android:id="@+id/edtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Ingrese su "
+                android:textColor="@color/black"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:text="@string/txt_apellido"
             android:textColor="@color/black"
+            android:textStyle="bold"
             android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/ETLastName"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:inputType="text"/>
+            android:layout_marginVertical="10dp"
+            android:background="@color/white"
+            app:boxBackgroundMode="none"
+            app:endIconMode="clear_text"
+            app:hintEnabled="false">
+
+            <EditText
+                android:id="@+id/ETLastname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="correo"
+                android:textColor="@color/black"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:text="@string/txt_correo_electronico"
             android:textColor="@color/black"
+            android:textStyle="bold"
             android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/ETEmail"
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@id/ETEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:inputType="textEmailAddress"/>
+            android:layout_marginVertical="10dp"
+            android:background="@color/white"
+            app:boxBackgroundMode="none"
+            app:endIconMode="clear_text"
+            app:hintEnabled="false">
+
+            <EditText
+                android:id="@+id/ETEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="correo"
+                android:textColor="@color/black"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
             android:text="@string/txt_contrase_a"
             android:textColor="@color/black"
+            android:textStyle="bold"
             android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/ETPassword"
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:inputType="textPassword"/>
+            android:layout_marginVertical="10dp"
+            android:background="@color/white"
+            app:boxBackgroundMode="none"
+            app:endIconMode="clear_text"
+            app:hintEnabled="false">
+
+            <EditText
+                android:id="@+id/edtPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="correo"
+                android:textColor="@color/black"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/BtnRegister"
