@@ -20,6 +20,7 @@ class GarajeActivity : AppCompatActivity() {
             val modelo = binding.editText2.text.toString()
             val cilindraje = binding.editText3.text.toString()
             val placa = binding.editText4.text.toString()
+            val intent=Intent(this,ShowGarageActivity::class.java)
 
 
 
@@ -32,6 +33,7 @@ class GarajeActivity : AppCompatActivity() {
                 manager.inserDataRmotos(marca,modelo.toInt(),cilindraje.toInt(),placa)
                 Toast.makeText(this,"Moto Registrada", Toast.LENGTH_SHORT).show()
             }
+            startActivity(intent)
         }
         binding.button2.setOnClickListener {
             val intent = Intent(this,ShowGarageActivity::class.java)
