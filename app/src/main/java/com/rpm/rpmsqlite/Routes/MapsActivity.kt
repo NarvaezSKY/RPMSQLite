@@ -42,9 +42,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityMapsBinding.inflate(LayoutInflater.from(this))
         setContentView(binding.root)
 
-
-
-
         btnCalculate = binding.btnCalculateRoute
         btnCalculate.setOnClickListener {
             start = ""

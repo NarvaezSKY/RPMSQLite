@@ -22,7 +22,7 @@ data class ManagerDb(val context: Context) {
     }
 
 
-    fun insertRoute (nombreRuta:String, cordenadasInicio:String,cordenadasFinal:String, detalleRuta:String):Long {
+    fun insertRoute (nombreRuta:String, cordenadasInicio:String,cordenadasFinal:String, detalleRuta:String, imagen:String):Long {
 
         openBdWr() // Abrir bd modo escritura
 
@@ -32,6 +32,7 @@ data class ManagerDb(val context: Context) {
         contenedor.put("cordenadasInicio",cordenadasInicio)
         contenedor.put("cordenadasFinal",cordenadasFinal)
         contenedor.put("detalle",detalleRuta)
+        contenedor.put("imagen",imagen)
 
         //Llamo el método insert
         val result = bd.insert("routes", null, contenedor )
@@ -85,19 +86,19 @@ data class ManagerDb(val context: Context) {
                 val nombreR = cursor.getColumnIndex("rutaN") // se almacena en las variables lo que tiene en el cursor en la fila cero
                 val cordenadasInicio = cursor.getColumnIndex("cordenadasInicio")
                 val cordenadasFinal = cursor.getColumnIndex("cordenadasFinal")
-
                 val detalle = cursor.getColumnIndex("detalle")
+                val imagen = cursor.getColumnIndex("imagen")
 
                 //Obtener valores condicionando a valores no null
                 val vlrNombreR:String = cursor.getString(nombreR)
                 val vlrcodCordenadaInicio: String = cursor.getString(cordenadasInicio)
                 val vlrcodCordenadaFinal: String = cursor.getString(cordenadasFinal)
-
                 val vlrDetalle: String = cursor.getString(detalle)
+                val vlrImagen: String = cursor.getString(imagen)
 
                 //Crear instancia de ciudad y agregar a la lista
 
-                val route = Route(vlrNombreR, vlrcodCordenadaInicio,vlrcodCordenadaFinal, vlrDetalle) // paso los valores obtenidos del cursor a mi objeto ciudad
+                val route = Route(vlrNombreR, vlrcodCordenadaInicio,vlrcodCordenadaFinal, vlrDetalle, vlrImagen) // paso los valores obtenidos del cursor a mi objeto ciudad
 
                 routeList.add(route) // Agrego mi objeto ciudad al array list
 
