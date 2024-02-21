@@ -190,9 +190,10 @@
 
                     <androidx.cardview.widget.CardView
                         android:id="@+id/btnTusRutas"
+                        android:layout_marginStart="10dp"
                         android:layout_width="200dp"
                         android:layout_height="125dp"
-
+                        app:layout_constraintStart_toEndOf="@+id/btnGaraje"
                         android:layout_marginTop="16dp"
                         android:backgroundTint="@color/card_font"
                         app:cardCornerRadius="20dp"
@@ -261,6 +262,8 @@
                         android:layout_height="125dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="10dp"
+                        app:layout_constraintStart_toEndOf="@+id/btnGaraje"
+                        android:layout_marginStart="10dp"
                         app:cardCornerRadius="20dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
