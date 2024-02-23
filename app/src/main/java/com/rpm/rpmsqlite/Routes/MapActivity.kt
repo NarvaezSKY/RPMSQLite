@@ -2,12 +2,15 @@ package com.rpm.rpmsqlite.Routes
 
 import android.content.Intent
 import android.graphics.Color
+import android.location.Address
+import android.location.Geocoder
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.SearchView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -16,38 +19,94 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.rpm.rpmsqlite.R
-import com.rpm.rpmsqlite.databinding.ActivityMapsBinding
+import com.rpm.rpmsqlite.databinding.ActivityMapBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.io.IOException
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
-    //Para el mapa
+@Suppress("DEPRECATION")
+class MapActivity : AppCompatActivity(), OnMapReadyCallback {
+
+    private lateinit var binding:ActivityMapBinding
     private lateinit var map: GoogleMap
     private lateinit var btnCalculate: Button
     private var start: String = ""
     private var end: String = ""
     var poly: Polyline? = null
-    //.
 
-
-
-    private lateinit var binding: ActivityMapsBinding
+    //vaarivle para abuscador
+    private lateinit var mapSearchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMapsBinding.inflate(LayoutInflater.from(this))
+        binding=ActivityMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        val mapFragment = supportFragmentManager
+            .findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
         btnCalculate = binding.btnCalculateRoute
+
+
+        mapSearchView=binding.mapSearch
+        mapSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                val location = query ?: return false
+                var addressList: List<Address>? = null
+
+
+
+                if (location.isNotBlank()) {
+                    val geocoder = Geocoder(this@MapActivity)
+
+                    try {
+                        addressList = geocoder.getFromLocationName(location, 1)
+                    } catch (e: IOException) {
+                        // Manejo de errores más detallado aquí (por ejemplo, mostrar un mensaje de error)
+                        e.printStackTrace()
+                    }
+
+                    if (!addressList.isNullOrEmpty()) {
+                        val address: Address = addressList[0]
+                        val latLng = LatLng(address.latitude, address.longitude)
+
+                        map.clear()
+                        map.addMarker(MarkerOptions().position(latLng).title(location))
+                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13F))
+                    }
+
+                }
+
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                // Acción a realizar cuando cambia el texto de búsqueda
+                return false
+            }
+        })
+
+
+
+
+
+
+
+
+        //Puntos y tarazar Ruta
+
         btnCalculate.setOnClickListener {
             start = ""
             end = ""
             poly?.remove()
             poly= null
+
+
+
             Toast.makeText(this,"Selecciona punto de origen y final", Toast.LENGTH_SHORT).show()
             map?.clear()
             binding.buttonContainer.removeAllViews()
@@ -70,45 +129,38 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             mapFragment.getMapAsync(this)
         }
 
+        //desplegable
+        val bottomSheet = findViewById<FrameLayout>(R.id.desp)
+        val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet).apply {
+            peekHeight=650
+            this.state=BottomSheetBehavior.STATE_COLLAPSED
+        }
+        val button = binding.icon
+        button.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        }
+        binding.btnCalculateRoute.setOnClickListener {
+            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        }
 
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        val mapFragment = supportFragmentManager
-            .findFragmentById(R.id.map) as SupportMapFragment
-        mapFragment.getMapAsync(this)
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+
+
+
+
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-        val zoom =13.0f
-        // Add a marker in Sydney and move the camera
+        val zoom = 13.0f
+        // Add a marker in Popayán and move the camera
         val popayan = LatLng(2.44184386299662, -76.60638743215519)
 
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(popayan,zoom))
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(popayan, zoom))
     }
 
     private fun createRoute() {
@@ -122,16 +174,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
     }
-//    private fun drawRoute(routeResponse: RouteResponse?) {
-//        val polyLineOptions = PolylineOptions()
-//        routeResponse?.features?.first()?.geometry?.coordinates?.forEach {
-//            polyLineOptions.add(LatLng(it[1], it[0]))
-//        }
-//        runOnUiThread {
-//            poly =  map.addPolyline(polyLineOptions)
-//        }
-//    }
-
     private fun drawRoute(routeResponse: RouteResponse?) {
 
 
@@ -166,7 +208,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
                 //un nuevo boton para agregar la ruta
-                val newButton = Button(this@MapsActivity).apply {
+                val newButton = Button(this).apply {
                     text = "Guardar Ruta"
                     setBackgroundColor(Color.parseColor("#ffc800"))
 
@@ -188,13 +230,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
     }
-
-
-
-
-
-
-
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://api.openrouteservice.org/")
@@ -204,4 +239,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
 
+
 }
+
