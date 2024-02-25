@@ -9,7 +9,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_constraintEnd_toStartOf="@+id/map"
+        app:layout_constraintStart_toStartOf="@+id/map">
 
         <fragment
             android:id="@+id/map"
@@ -23,18 +25,15 @@
             map:uiRotateGestures="true" />
 
 
-
-
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <FrameLayout
         android:id="@+id/desp"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
+        android:layout_height="400dp"
         android:background="@drawable/shape"
+        android:backgroundTint="@color/white"
         app:behavior_hideable="true"
         app:behavior_peekHeight="100dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
@@ -43,7 +42,7 @@
         <ImageView
             android:id="@+id/icon"
             android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_height="50dp"
             android:layout_gravity="center|top"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_remove" />
@@ -61,34 +60,36 @@
                 android:layout_height="wrap_content"
                 android:scaleType="centerCrop"
                 android:text="Traza tu Ruta"
-                android:textColor="@color/primary"
+                android:textColor="@color/black"
                 android:textSize="20sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <SearchView
-                android:id="@+id/mapSearch"
+            <EditText
+                android:id="@+id/pInicio"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:background="@drawable/bg_search"
-                android:queryHint="Punto Inicio"
+                android:hint="Punto Inicio"
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/info" />
 
-            <SearchView
+            <EditText
                 android:id="@+id/pFinal"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:background="@drawable/bg_search"
-                android:queryHint="Punto Final"
+                android:hint="Punto Final"
+                android:inputType="text"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mapSearch" />
-
+                app:layout_constraintTop_toBottomOf="@+id/pInicio" />
 
 
             <Button

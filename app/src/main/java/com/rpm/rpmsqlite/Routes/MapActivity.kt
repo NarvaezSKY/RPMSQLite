@@ -6,21 +6,24 @@ import android.location.Address
 import android.location.Geocoder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.FrameLayout
-import android.widget.SearchView
 import android.widget.Toast
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.Polyline
 import com.google.android.gms.maps.model.PolylineOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.rpm.rpmsqlite.R
+import kotlin.math.*
 import com.rpm.rpmsqlite.databinding.ActivityMapBinding
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -35,12 +38,43 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var binding:ActivityMapBinding
     private lateinit var map: GoogleMap
     private lateinit var btnCalculate: Button
-    private var start: String = ""
-    private var end: String = ""
+
     var poly: Polyline? = null
 
+    private var startLatLng: LatLng? = null
+    private var endLatLng: LatLng? = null
+
+
+
     //vaarivle para abuscador
-    private lateinit var mapSearchView: SearchView
+    private lateinit var pInicioEditText: EditText
+    private lateinit var pFinalEditText: EditText
+
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<FrameLayout>
+
+    fun distanceInKm(startLat: Double, startLng: Double, endLat: Double, endLng: Double): Double {
+        val radioDeLaTierra = 6371.0 // Radio de la Tierra en kilómetros
+
+        // Convertir latitudes y longitudes a radianes
+        val startLatRad = Math.toRadians(startLat)
+        val startLngRad = Math.toRadians(startLng)
+        val endLatRad = Math.toRadians(endLat)
+        val endLngRad = Math.toRadians(endLng)
+
+        // Calcular la diferencia de latitud y longitud
+        val deltaLat = endLatRad - startLatRad
+        val deltaLng = endLngRad - startLngRad
+
+        // Calcular la fórmula del haversine con un enfoque más preciso
+        val a = Math.sin(deltaLat / 2) * Math.sin(deltaLat / 2) +
+                Math.cos(startLatRad) * Math.cos(endLatRad) * Math.sin(deltaLng / 2) * Math.sin(deltaLng / 2)
+        val c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+
+        // Devolver la distancia en kilómetros
+        return radioDeLaTierra * c
+    }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,96 +86,109 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         btnCalculate = binding.btnCalculateRoute
 
 
-        mapSearchView=binding.mapSearch
-        mapSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                val location = query ?: return false
-                var addressList: List<Address>? = null
-
-
-
-                if (location.isNotBlank()) {
-                    val geocoder = Geocoder(this@MapActivity)
-
-                    try {
-                        addressList = geocoder.getFromLocationName(location, 1)
-                    } catch (e: IOException) {
-                        // Manejo de errores más detallado aquí (por ejemplo, mostrar un mensaje de error)
-                        e.printStackTrace()
-                    }
-
-                    if (!addressList.isNullOrEmpty()) {
-                        val address: Address = addressList[0]
-                        val latLng = LatLng(address.latitude, address.longitude)
-
-                        map.clear()
-                        map.addMarker(MarkerOptions().position(latLng).title(location))
-                        map.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 13F))
-                    }
-
-                }
-
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                // Acción a realizar cuando cambia el texto de búsqueda
-                return false
-            }
-        })
+        pInicioEditText = binding.pInicio
+        pFinalEditText = binding.pFinal
 
 
 
 
 
 
-
-
-        //Puntos y tarazar Ruta
 
         btnCalculate.setOnClickListener {
-            start = ""
-            end = ""
-            poly?.remove()
-            poly= null
+            val location1 = pInicioEditText.text.toString()
+            val location2 = pFinalEditText.text.toString()
+
+            if (location1.isNotBlank() && location2.isNotBlank()) {
+                val geocoder = Geocoder(this@MapActivity)
+
+                try {
+                    val addressList1 = geocoder.getFromLocationName(location1, 1)
+                    val addressList2 = geocoder.getFromLocationName(location2, 1)
+
+                    if (!addressList1.isNullOrEmpty() && !addressList2.isNullOrEmpty()) {
+                        val startAddress: Address = addressList1[0]
+                        val endAddress: Address = addressList2[0]
+                        val startLatLng = LatLng(startAddress.latitude, startAddress.longitude)
+                        val endLatLng = LatLng(endAddress.latitude, endAddress.longitude)
 
 
 
-            Toast.makeText(this,"Selecciona punto de origen y final", Toast.LENGTH_SHORT).show()
-            map?.clear()
-            binding.buttonContainer.removeAllViews()
 
-            if (::map.isInitialized) {
-                map.setOnMapClickListener {
-                    if (start.isEmpty()) {
-                        start = "${it.longitude},${it.latitude}"
 
-                        Toast.makeText(this, "Primer Punto Seleccionado", Toast.LENGTH_SHORT).show()
+                        // Trazar la ruta entre los dos puntos
+                        createRoute(startLatLng, endLatLng)
+                        Toast.makeText(this, "Calculando Ruta", Toast.LENGTH_SHORT).show()
+                        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
 
-                    } else if (end.isEmpty()) {
-                        end = "${it.longitude},${it.latitude}"
-                        Toast.makeText(this, "Segundo Punto Seleccionado", Toast.LENGTH_SHORT).show()
-                        createRoute()
+                        val distanceKm = distanceInKm(startLatLng.latitude, startLatLng.longitude, endLatLng.latitude, endLatLng.longitude)
+                        val distanceKmRounded = "%.2f".format(distanceKm)
+                        Toast.makeText(this, "Los Km son ${distanceKmRounded}", Toast.LENGTH_SHORT).show()
+
+                    } else {
+                        Toast.makeText(this, "No se encontraron direcciones para los puntos ingresados", Toast.LENGTH_SHORT).show()
                     }
+                } catch (e: IOException) {
+                    // Manejo de errores más detallado aquí (por ejemplo, mostrar un mensaje de error)
+                    e.printStackTrace()
                 }
+            } else {
+                Toast.makeText(this, "Por favor, ingrese los puntos de inicio y final", Toast.LENGTH_SHORT).show()
             }
-            val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-            mapFragment.getMapAsync(this)
         }
+
+        //calcular los km
+
+
+
+        // Función para calcular la distancia en kilómetros entre dos puntos dadas sus coordenadas
+
+
+// Uso de la función para calcular la distancia entre dos puntos
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         //desplegable
         val bottomSheet = findViewById<FrameLayout>(R.id.desp)
-        val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet).apply {
-            peekHeight=650
-            this.state=BottomSheetBehavior.STATE_COLLAPSED
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet).apply {
+            val displayMetrics = DisplayMetrics()
+            windowManager.defaultDisplay.getMetrics(displayMetrics)
+            val screenHeight = displayMetrics.heightPixels
+            peekHeight = (screenHeight * 0.15).toInt()
+            state = BottomSheetBehavior.STATE_COLLAPSED
         }
+
+        // Resto del código...
+
+        // Asignar onClickListener al botón utilizando bottomSheetBehavior
+        // Variable para realizar un seguimiento del estado del BottomSheet
+        var isBottomSheetExpanded = false
+
         val button = binding.icon
         button.setOnClickListener {
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+            if (isBottomSheetExpanded) {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            } else {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            }
+
+            isBottomSheetExpanded = !isBottomSheetExpanded
         }
-        binding.btnCalculateRoute.setOnClickListener {
-            bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        }
+
+//
 
 
 
@@ -149,6 +196,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
     }
+    //fura de oncreate
 
 
 
@@ -163,25 +211,26 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         map.animateCamera(CameraUpdateFactory.newLatLngZoom(popayan, zoom))
     }
 
-    private fun createRoute() {
+    private fun createRoute(startLatLng: LatLng, endLatLng: LatLng) {
+        // Tratar de obtener la ruta entre los puntos de inicio y final
         CoroutineScope(Dispatchers.IO).launch {
+
+
             val call = getRetrofit().create(ApiService::class.java)
-                .getRoute("5b3ce3597851110001cf6248c50b947f1222418498fae123bb1a6114", start, end)
+                .getRoute("5b3ce3597851110001cf6248c50b947f1222418498fae123bb1a6114", "${startLatLng.longitude},${startLatLng.latitude}", "${endLatLng.longitude},${endLatLng.latitude}")
+
             if (call.isSuccessful) {
-                drawRoute(call.body())
+                drawRoute(call.body(), startLatLng, endLatLng)
             } else {
-                Log.i("aris", "OK")
+                Log.i("aris", "Error al obtener la ruta")
             }
         }
     }
-    private fun drawRoute(routeResponse: RouteResponse?) {
-
-
-
+    private fun drawRoute(routeResponse: RouteResponse?, startLatLng: LatLng, endLatLng: LatLng) {
         routeResponse?.features?.firstOrNull()?.geometry?.coordinates?.let { coordinates ->
             val polyLineOptions = PolylineOptions().apply {
-                width(9f)
-                color(Color.parseColor("#ffc800"))
+                width(10f)
+                color(Color.parseColor("#1486cc"))
                 coordinates.forEach { coordinate ->
                     add(LatLng(coordinate[1], coordinate[0]))
                 }
@@ -191,45 +240,41 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 map?.addPolyline(polyLineOptions)
             }
 
-            // Agregar marcador al inicio
-            val startPoint = LatLng(coordinates.first()[1], coordinates.first()[0])
-            val startMarkerOptions = MarkerOptions().position(startPoint).title("Inicio")
+            val startMarkerOptions = MarkerOptions().position(startLatLng).title("Inicio")
+            val endMarkerOptions = MarkerOptions().position(endLatLng).title("Fin")
 
             runOnUiThread {
                 map?.addMarker(startMarkerOptions)
-            }
-
-            // Agregar marcador al final
-            val endPoint = LatLng(coordinates.last()[1], coordinates.last()[0])
-            val endMarkerOptions = MarkerOptions().position(endPoint).title("Fin")
-
-            runOnUiThread {
                 map?.addMarker(endMarkerOptions)
 
+                // Calcular LatLngBounds que abarca ambos puntos
+                val builder = LatLngBounds.Builder()
+                builder.include(startLatLng)
+                builder.include(endLatLng)
+                val bounds = builder.build()
 
-                //un nuevo boton para agregar la ruta
+                // Ajustar la cámara para que abarque ambos puntos con un padding
+                val padding = 100 // Puedes ajustar este valor según tus preferencias
+                val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding)
+                map?.animateCamera(cameraUpdate)
+
+                // Aquí guardas las variables
                 val newButton = Button(this).apply {
                     text = "Guardar Ruta"
-                    setBackgroundColor(Color.parseColor("#ffc800"))
-
-
+                    setBackgroundColor(Color.parseColor("#1486cc"))
                     setTextColor(Color.WHITE)
                     setOnClickListener {
-                        val intent= Intent(this.context, saveRutasActivity::class.java)
-                        //pasamos las cordenadas
-                        intent.putExtra("cordenadasInicio", start.toString())
-                        intent.putExtra("cordenadasFinal", end.toString())
-
-
-
+                        val intent = Intent(this.context, saveRutasActivity::class.java)
+                        intent.putExtra("cordenadasInicio", startLatLng.toString())
+                        intent.putExtra("cordenadasFinal", endLatLng.toString())
                         startActivity(intent)
                     }
                 }
                 binding.buttonContainer.addView(newButton)
-
             }
         }
     }
+
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl("https://api.openrouteservice.org/")
