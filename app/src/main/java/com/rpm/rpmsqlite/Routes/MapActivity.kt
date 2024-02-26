@@ -107,7 +107,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
 
         btnCalculate.setOnClickListener {
-            val location1 = pInicioEditText.text.toString() ||
+            val location1 = pInicioEditText.text.toString()
             val location2 = pFinalEditText.text.toString()
 
             if (location1.isNotBlank() && location2.isNotBlank()) {
